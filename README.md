@@ -15,7 +15,7 @@ The goal was to use __broad taxonomic categories__ to separate taxa found in pla
 * Benthic: This category includes benthic organisms without a planktonic larva. For example, Naineris dendritica, a benthic polychaete that has aplanktonic development (Grantham et al., 2004). This category can also include benthic/sedentary organisms that have a benthic larval stage (e.g., some harpacticoid copepods).
 * Holo/Mero: when the classification is uncertain (e.g., for some families of polychaetes where both plankton groups have been reported).
 
-We also highlighted taxa that are parasites when possible. For example, for the family Pyramidellidae the classification is "Meroplankton - parasite of invertebrates". Or for some copepods, the classification is "Holoplankton - fish parasites". Users can remove these flags by retaining only the text before the dashes.
+When possible, we also highlighted taxa that are parasites. For example, for the family Pyramidellidae the classification is "Meroplankton - parasite of invertebrates". Or for some copepods, the classification is "Holoplankton - fish parasites". Users can remove these flags by retaining only the text before the dashes.
 
 The taxonomic focus is __metazoans__. The development of the function began with advice from Karen Osborn and Allen Collins of the NMNH Invertebrate Zoology Department, National Museum of Natural History, Smithsonian Institution, while working on the Pappalardo et al. (2021) publication. Since then, Paula Pappalardo has been updating this function with further research, often searching specific species or smaller taxonomic groups and adding taxonomic levels as in NCBI or WoRMS taxonomy. There are comments in the function that point to particular websites where information on larval development was found. Often, all members of a phylum belong to the same plankton type (e.g., all Sipuncula were meroplankton). But for many groups (e.g., Annelida, Arthropoda), we provide taxonomic filters that involve taxonomic assignments below the level of phylum (i.e, Class, Order, Family). After working on additional projects, new classifications have been added at the genus and species levels to the original function. Paula has also utilized her life history database, InvertTraits (unpublished - forthcoming), to enhance the classification of plankton groups. A publication and release for InvertTraits is in the making. You can check Paula's website for updates: https://paulapappalardo.weebly.com/. There are comments within the function indicating when the information was taken from InvertTraits. 
 
@@ -27,7 +27,7 @@ CITATION: Please cite this repo and the original Pappalardo et al., 2021 publica
 
 DEPENDENCIES: The function requires the R packages [dplyr](https://dplyr.tidyverse.org/) and [taxize](https://docs.ropensci.org/taxize/articles/taxize.html).
 
-USAGE: this is an R function taking a dataframe or tibble as the argument. The dataframe needs to include columns for phylum, class, order, family, genus and species. Based on this, the function returns the same dataframe with an additional column, called "plankton_group", appended. How to use:
+USAGE: This is an R function taking a dataframe or tibble as the argument. You need to copy the function from this repo and load it into your R environment so that is ready to be used. The dataframe needs to include columns for phylum, class, order, family, genus and species. Based on this, the function returns the same dataframe with an additional column, called "plankton_group", appended. How to use:
 
 ```r
 
