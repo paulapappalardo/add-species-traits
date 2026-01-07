@@ -31,6 +31,10 @@ addPlanktonGroup <- function(mydf){
   actinopteri <- downstream("Actinopteri", db ='worms', downto = "Order")
   acti_orders <- actinopteri[[1]]$name
   rm(actinopteri)
+  # rhizocephalans
+  rhizo <- downstream("Rhizocephala", db ='worms', downto = "Family")
+  rhizo_fams <- rhizo[[1]]$name
+  rm(rhizo)
   # hyperiids
   hyperiids <- downstream("Hyperiidea", db ='worms', downto = "Family")
   hype_families <- hyperiids[[1]]$name
@@ -86,6 +90,7 @@ addPlanktonGroup <- function(mydf){
       phylum == "Annelida" & class == "Polychaeta" & family == "Sabellidae" ~ "Meroplankton",
       phylum == "Annelida" & class == "Polychaeta" & family == "Sabellariidae" ~ "Meroplankton",
       phylum == "Annelida" & class == "Polychaeta" & family == "Poecilochaetidae" ~ "Meroplankton",
+      phylum == "Annelida" & class == "Polychaeta" & genus == "Mesonerilla" ~ "Benthic", # meiofauna annelids with direct development
       phylum == "Annelida" & class == "Polychaeta" & family == "Nephtyidae" ~ "Meroplankton", # InvertTraits has all 9 species with info as having planktonic larvae
       phylum == "Annelida" & class == "Polychaeta" & family == "Dorvilleidae" ~ "Meroplankton", # InvertTraits has 10 of 11 species with info as having planktonic larvae
       phylum == "Annelida" & class == "Polychaeta" & family == "Spionidae" ~ "Meroplankton",
@@ -94,6 +99,7 @@ addPlanktonGroup <- function(mydf){
       phylum == "Annelida" & class == "Polychaeta" & family == "Chaetopteridae" ~ "Meroplankton",
       phylum == "Annelida" & class == "Polychaeta" & family == "Magelonidae" ~ "Meroplankton",
       phylum == "Annelida" & class == "Polychaeta" & family == "Polynoidae" ~ "Meroplankton",
+      phylum == "Annelida" & class == "Polychaeta" & species == "Clymenella torquata" ~ "Benthic", # from Paula's InvertTraits and Schückel et al 2024; adults are sedentary, larvae are short lived and demersal 
       phylum == "Annelida" & class == "Polychaeta" & family == "Hesionidae" ~ "Meroplankton",# from Paula's InvertTraits database
       phylum == "Annelida" & class == "Polychaeta" & genus == "Leitoscoloplos" ~ "Meroplankton",# from Paula's InvertTraits database
       phylum == "Annelida" & class == "Polychaeta" & family == "Phyllodocidae" ~ "Meroplankton", #https://en.wikipedia.org/wiki/Phyllodocidae
@@ -104,10 +110,10 @@ addPlanktonGroup <- function(mydf){
       #
       # ----Phylum Mollusca----
       #
-      phylum == "Mollusca" & class== "Gastropoda" & species == "Rictaxis punctocaelatus" ~ "Meroplankton",
+      phylum == "Mollusca" & class== "Gastropoda" & species %in% c("Rictaxis punctocaelatus", "Bittiolum varium", "Seila adamsii", "Marshallora nigrocincta", "Chaetopleura apiculata") ~ "Meroplankton",# InvertTraits for Bittioloum varium, Seila adamsii, Marshallora nigrocincta, Chaetopleura apiculata
       phylum == "Mollusca" & class== "Gastropoda" & species == "Physella acuta" ~ "benthic - freshwater",
-      phylum == "Mollusca" & class== "Gastropoda" & family == "Pyramidellidae" ~ "Meroplankton - parasite of invertebrates",
-      phylum == "Mollusca" & class== "Gastropoda" & (family %in% c("Plakobranchidae", "Hermaeidae", "Limapontiidae", "Lottiidae"))  ~ "Meroplankton",
+      phylum == "Mollusca" & class== "Gastropoda" & family == "Pyramidellidae" ~ "Parasites - invert hosts",
+      phylum == "Mollusca" & class== "Gastropoda" & (family %in% c("Plakobranchidae", "Hermaeidae", "Limapontiidae", "Lottiidae", "Epitoniidae"))  ~ "Meroplankton",
       phylum == "Mollusca" & class== "Gastropoda" & (family  %in% c("Atlantidae", "Pterotracheidae", "Carinariidae")) ~ "Holoplankton",
       phylum == "Mollusca" & class== "Gastropoda" & order!= "Pteropoda" ~ "Meroplankton",
       # 3 Tonicellidae in InvertTraits with planktonic-nonfeeding larvae
@@ -139,6 +145,7 @@ addPlanktonGroup <- function(mydf){
       #
       # ----Phylum Arthropoda----
       #
+      phylum == "Arthropoda" & class== "Maxillopoda" & order == "Arguloida"  ~ "Parasites - fish host - ectoparasites",
       phylum == "Arthropoda" & class== "Maxillopoda" & order == "Pedunculata" & species == "Pollicipes polymerus" ~ "Meroplankton",
       phylum == "Arthropoda" & class== "Malacostraca" & order == "Decapoda" &
         (family == "Penaeidae" | family == "Palaemonidae" | family == "Hippolytidae" |
@@ -146,6 +153,7 @@ addPlanktonGroup <- function(mydf){
       phylum == "Arthropoda" & class== "Malacostraca" & order == "Decapoda" &
         !(family == "Penaeidae" | family == "Palaemonidae" | family == "Hippolytidae" |
             family == "Pandalidae" | family == "Alpheidae") ~ "Meroplankton",
+      phylum == "Arthropoda" & family %in% rhizo_fams ~ "Parasites - crustacean hosts",
       phylum == "Arthropoda" & class== "Maxillopoda" & order == "Sessilia"~ "Meroplankton",
       phylum == "Arthropoda" & class== "Thecostraca" & order == "Sessilia"~ "Meroplankton",
       phylum == "Arthropoda" & class== "Thecostraca" & order == "Balanomorpha"~ "Meroplankton",
@@ -164,9 +172,11 @@ addPlanktonGroup <- function(mydf){
                                                                    "Holobomolochus spinulus", "Chondracanthus gracilis",
                                                                    "Ergasilus turgidus", "Eudactylina similis",
                                                                    "Pseudocharopinus dentatus", "Haemobaphes diceraus",
-                                                                   "Nectobrachia indivisa") ~ "Holoplankton - fish parasites",
-      phylum == "Arthropoda" & class== "Copepoda" & family == "Monstrillidae" ~ "Holoplankton - invert parasites",
-      phylum == "Arthropoda" & class== "Copepoda" & family == "Caligidae" ~ "Holoplankton - fish parasites",
+                                                                   "Nectobrachia indivisa") ~ "Parasites - fish hosts",
+      phylum == "Arthropoda" & class== "Copepoda" & family == "Monstrillidae" ~ "Parasites - invert hosts",
+      phylum == "Arthropoda" & class== "Copepoda" & family == "Caligidae" ~ "Parasites - fish hosts",
+      phylum == "Arthropoda" & class== "Copepoda" & family == "Pennellidae" ~ "Parasites - fish and whale hosts",
+      phylum == "Arthropoda" & class== "Copepoda" & family == "Canuellidae" ~ "Meroplankton", # benthic intersticial adults with naupliar larval stages
       phylum == "Arthropoda" & class== "Copepoda" & order %in% c("Calanoida", "Cyclopoida") ~ "Holoplankton",
       phylum == "Arthropoda" & class== "Copepoda" & order == "Harpacticoida" & genus == "Alteutha" ~ "Holoplankton", # this genus has pelagic adults
       phylum == "Arthropoda" & class== "Copepoda" & order == "Harpacticoida" & genus == "Microsetella" ~ "Holoplankton", # this genus has pelagic adults
@@ -194,6 +204,7 @@ addPlanktonGroup <- function(mydf){
       # ----Other phyla----
       #
       phylum == "Sipuncula" | class == "Sipuncula" ~ "Meroplankton", # depending on taxonomy Sipuncula is as class (e.g., NCBI)
+      phylum == "Xenacoelomorpha" & family == "Convolutidae" ~ "Meroplankton", 
       phylum == "Bryozoa" ~ "Meroplankton",
       phylum == "Ctenophora" ~ "Holoplankton",
       phylum == "Brachiopoda" ~ "Meroplankton",
