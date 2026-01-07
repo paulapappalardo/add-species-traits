@@ -23,7 +23,10 @@ There are differences in higher taxonomy classification across different taxonom
 
 If you have suggestions for improvement, please open an issue. Paula will regularly update this function and release new versions when significant changes accumulate.
 
-CITATION: Please cite this repo and the original Pappalardo et al., 2021 publication.
+CITATION: Please cite:
+1) this repo: Paula Pappalardo. (2025). paulapappalardo/add-species-traits: First public release (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.17467576
+2) the original Pappalardo et al., 2021 publication:
+Paula Pappalardo, Allen G Collins, Katrina M Pagenkopp Lohan, Kate M Hanson, Sarit B Truskey, William Jaeckle, Cheryl Lewis Ames, Jessica A Goodheart, Stephanie L Bush, Leann M Biancani, Ellen E Strong, Michael Vecchione, M G Harasewych, Karen Reed, Chan Lin, Elise C Hartil, Jessica Whelpley, Jamie Blumberg, Kenan Matterson, Niamh E Redmond, Allison Becker, Michael J Boyle & Karen J Osborn. The role of taxonomic expertise in interpretation of metabarcoding studies, ICES Journal of Marine Science, Volume 78, Issue 9, November 2021, Pages 3397–3410, https://doi.org/10.1093/icesjms/fsab082
 
 DEPENDENCIES: The function requires the R packages [dplyr](https://dplyr.tidyverse.org/) and [taxize](https://docs.ropensci.org/taxize/articles/taxize.html).
 
